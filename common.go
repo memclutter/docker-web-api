@@ -49,4 +49,5 @@ func SendJSONOrError(w http.ResponseWriter, data interface{}) {
 func SendOk(w http.ResponseWriter) {
 	w.WriteHeader(200)
 	w.Header().Set("Content-Type", "application/json")
+	w.Write([]byte("[]"))
 }
