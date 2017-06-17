@@ -16,6 +16,7 @@ func main() {
 	flag.Parse()
 
 	log.Printf("Starting docker web ui server")
+	log.Printf("Serve angular frontend from %v", dist)
 	log.Printf("Listening for HTTP connections at: http://%v:%v", *domain, *port)
 
 	router := httptreemux.New()
