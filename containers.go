@@ -8,6 +8,7 @@ import (
 	"github.com/docker/docker/client"
 	"fmt"
 	"strconv"
+	"github.com/docker/docker/api/types/filters"
 )
 
 func apiContainers(w http.ResponseWriter, r *http.Request, params map[string]string) {
@@ -23,6 +24,13 @@ func apiContainers(w http.ResponseWriter, r *http.Request, params map[string]str
 		return
 	} else {
 		options.All = all
+	}
+
+	if f, err := filters.FromParam(QueryGetOrDefaultValue(r, "filters", "")); err != nil {
+		SendHttpError(400, fmt.Sprintf("Invalid all parameter type %v", err), w)
+		return
+	} else {
+		options.Filters = f
 	}
 
 	containers, err := docker.ContainerList(context.Background(), options)
