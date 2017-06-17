@@ -1,13 +1,13 @@
 package main
 
 import (
-	"net/http"
-	"github.com/docker/docker/client"
-	"github.com/docker/docker/api/types"
-	"fmt"
-	"strconv"
 	"context"
+	"fmt"
+	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/filters"
+	"github.com/docker/docker/client"
+	"net/http"
+	"strconv"
 )
 
 func apiImages(w http.ResponseWriter, r *http.Request, params map[string]string) {
@@ -25,7 +25,7 @@ func apiImages(w http.ResponseWriter, r *http.Request, params map[string]string)
 		options.All = all
 	}
 
-	if f, err := filters.FromParam(QueryGetOrDefaultValue(r,"filters", "")); err != nil {
+	if f, err := filters.FromParam(QueryGetOrDefaultValue(r, "filters", "")); err != nil {
 		SendHttpError(400, fmt.Sprintf("Invalid filters %v", err), w)
 		return
 	} else {

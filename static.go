@@ -2,12 +2,12 @@ package main
 
 import (
 	"net/http"
-	"strings"
 	"os"
+	"strings"
 )
 
 func indexHandler(w http.ResponseWriter, r *http.Request, params map[string]string) {
-	http.ServeFile(w, r, *dist + "index.html")
+	http.ServeFile(w, r, *dist+"index.html")
 }
 
 // Handle Static Files (files containing a .extension)

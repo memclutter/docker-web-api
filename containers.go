@@ -1,14 +1,14 @@
 package main
 
 import (
-	"net/http"
 	"context"
+	"net/http"
 
-	"github.com/docker/docker/api/types"
-	"github.com/docker/docker/client"
 	"fmt"
-	"strconv"
+	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/filters"
+	"github.com/docker/docker/client"
+	"strconv"
 )
 
 func apiContainers(w http.ResponseWriter, r *http.Request, params map[string]string) {

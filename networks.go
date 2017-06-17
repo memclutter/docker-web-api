@@ -1,12 +1,12 @@
 package main
 
 import (
-	"net/http"
-	"github.com/docker/docker/client"
+	"context"
 	"fmt"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/filters"
-	"context"
+	"github.com/docker/docker/client"
+	"net/http"
 )
 
 func apiNetworks(w http.ResponseWriter, r *http.Request, params map[string]string) {

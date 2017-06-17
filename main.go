@@ -2,8 +2,8 @@ package main
 
 import (
 	"flag"
-	"net/http"
 	"log"
+	"net/http"
 
 	"github.com/dimfeld/httptreemux"
 )
@@ -37,7 +37,7 @@ func main() {
 	router.GET("/api/volumes", apiVolumes)
 	router.DELETE("/api/volumes/:id", apiVolumesDelete)
 
-	if err := http.ListenAndServe((*domain) + ":" + (*port), router); err != nil {
+	if err := http.ListenAndServe((*domain)+":"+(*port), router); err != nil {
 		log.Fatalf("ListenAndServe error: %v", err)
 	}
 }

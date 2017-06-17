@@ -1,12 +1,12 @@
 package main
 
 import (
+	"context"
+	"fmt"
+	"github.com/docker/docker/api/types/filters"
+	"github.com/docker/docker/client"
 	"net/http"
 	"strconv"
-	"fmt"
-	"github.com/docker/docker/client"
-	"context"
-	"github.com/docker/docker/api/types/filters"
 )
 
 func apiVolumes(w http.ResponseWriter, r *http.Request, params map[string]string) {

@@ -1,14 +1,14 @@
 package main
 
 import (
-	"net/http"
 	"encoding/json"
 	"fmt"
 	"log"
+	"net/http"
 )
 
 type HttpErrorResponse struct {
-	Message string	`json:"message"`
+	Message string `json:"message"`
 }
 
 // Send http error as JSON object like as {"message": "Error occurred"} or raw string
