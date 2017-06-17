@@ -26,6 +26,9 @@ func main() {
 	router.DELETE("/api/images/:id", apiImagesDelete)
 
 	router.GET("/api/containers", apiContainers)
+	router.POST("/api/containers/:id/start", apiContainersStart)
+	router.POST("/api/containers/:id/stop", apiContainersStop)
+	router.POST("/api/containers/:id/restart", apiContainersRestart)
 	router.DELETE("/api/containers/:id", apiContainersDelete)
 
 	router.GET("/api/networks", apiNetworks)

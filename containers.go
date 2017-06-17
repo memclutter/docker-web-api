@@ -34,6 +34,70 @@ func apiContainers(w http.ResponseWriter, r *http.Request, params map[string]str
 	SendJSONOrError(w, containers)
 }
 
+func apiContainersStart(w http.ResponseWriter, r *http.Request, params map[string]string) {
+	docker, err := client.NewEnvClient()
+	if err != nil {
+		SendHttpError(500, fmt.Sprintf("Docker: %v", err), w)
+		return
+	}
+
+	options := types.ContainerStartOptions{}
+	containerID, ok := params["id"]
+	if !ok {
+		SendHttpError(400, "Missing container ID", w)
+		return
+	}
+
+	if err := docker.ContainerStart(context.Background(), containerID, options); err != nil {
+		SendHttpError(500, fmt.Sprintf("%v", err), w)
+		return
+	}
+
+	SendOk(w)
+}
+
+func apiContainersStop(w http.ResponseWriter, r *http.Request, params map[string]string) {
+	docker, err := client.NewEnvClient()
+	if err != nil {
+		SendHttpError(500, fmt.Sprintf("Docker: %v", err), w)
+		return
+	}
+
+	containerID, ok := params["id"]
+	if !ok {
+		SendHttpError(400, "Missing container ID", w)
+		return
+	}
+
+	if err := docker.ContainerStop(context.Background(), containerID, nil); err != nil {
+		SendHttpError(500, fmt.Sprintf("%v", err), w)
+		return
+	}
+
+	SendOk(w)
+}
+
+func apiContainersRestart(w http.ResponseWriter, r *http.Request, params map[string]string) {
+	docker, err := client.NewEnvClient()
+	if err != nil {
+		SendHttpError(500, fmt.Sprintf("Docker: %v", err), w)
+		return
+	}
+
+	containerID, ok := params["id"]
+	if !ok {
+		SendHttpError(400, "Missing container ID", w)
+		return
+	}
+
+	if err := docker.ContainerRestart(context.Background(), containerID, nil); err != nil {
+		SendHttpError(500, fmt.Sprintf("%v", err), w)
+		return
+	}
+
+	SendOk(w)
+}
+
 func apiContainersDelete(w http.ResponseWriter, r *http.Request, params map[string]string) {
 	docker, err := client.NewEnvClient()
 	if err != nil {
