@@ -12,7 +12,7 @@ var addr = flag.String("addr", ":8080", "Http address and port")
 
 func main() {
 	flag.Parse()
-	http.FileServer(http.Dir(dist))
+	http.FileServer(http.Dir(*dist))
 	http.Handle("/api/", http.HandlerFunc(api))
 	err := http.ListenAndServe(*addr, nil)
 	if err != nil {
