@@ -22,6 +22,12 @@ func main() {
 	router.GET("/", indexHandler)
 	router.GET("/*", staticHandler)
 
+	router.GET("/api/images", apiImagesList)
+	router.DELETE("/api/images/:id", apiImagesRemove)
+
+	router.GET("/api/containers", apiContainersList)
+	router.DELETE("/api/containers/:id", apiContainersRemove)
+
 	if err := http.ListenAndServe((*domain) + ":" + (*port), router); err != nil {
 		log.Fatalf("ListenAndServe error: %v", err)
 	}
