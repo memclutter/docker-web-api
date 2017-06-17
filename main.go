@@ -22,11 +22,17 @@ func main() {
 	router.GET("/", indexHandler)
 	router.GET("/*", staticHandler)
 
-	router.GET("/api/images", apiImagesList)
-	router.DELETE("/api/images/:id", apiImagesRemove)
+	router.GET("/api/images", apiImages)
+	router.DELETE("/api/images/:id", apiImagesDelete)
 
-	router.GET("/api/containers", apiContainersList)
-	router.DELETE("/api/containers/:id", apiContainersRemove)
+	router.GET("/api/containers", apiContainers)
+	router.DELETE("/api/containers/:id", apiContainersDelete)
+
+	router.GET("/api/networks", apiNetworks)
+	router.DELETE("/api/networks/:id", apiNetworksDelete)
+
+	router.GET("/api/volumes", apiVolumes)
+	router.DELETE("/api/volumes/:id", apiVolumesDelete)
 
 	if err := http.ListenAndServe((*domain) + ":" + (*port), router); err != nil {
 		log.Fatalf("ListenAndServe error: %v", err)

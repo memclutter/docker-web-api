@@ -5,10 +5,10 @@ import (
 	"log"
 )
 
-func apiContainersList(w http.ResponseWriter, r *http.Request, params map[string]string) {
+func apiContainers(w http.ResponseWriter, r *http.Request, params map[string]string) {
 	log.Printf("Access to containers list")
 }
 
-func apiContainersRemove(w http.ResponseWriter, r *http.Request, params map[string]string) {
+func apiContainersDelete(w http.ResponseWriter, r *http.Request, params map[string]string) {
 	log.Printf("Access to containers remove")
 }
