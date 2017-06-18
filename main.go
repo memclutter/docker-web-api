@@ -23,6 +23,8 @@ func main() {
 	router.GET("/", indexHandler)
 	router.GET("/*", staticHandler)
 
+	router.GET("/api/system/info", apiSystemInfo)
+
 	router.GET("/api/images", apiImages)
 	router.DELETE("/api/images/:id", apiImagesDelete)
 
