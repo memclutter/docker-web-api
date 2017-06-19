@@ -53,3 +53,23 @@ func apiNetworksDelete(w http.ResponseWriter, r *http.Request, params map[string
 
 	SendOk(w)
 }
+
+func apiNetworksDeleteUnused(w http.ResponseWriter, r *http.Request, params map[string]string) {
+	docker, err := client.NewEnvClient()
+	if err != nil {
+		SendHttpError(500, fmt.Sprintf("Docker: %v", err), w)
+		return
+	}
+
+	pruneFilters, err := filters.FromParam(QueryGetOrDefaultValue(r, "filters", ""))
+	if err != nil {
+		SendHttpError(400, fmt.Sprintf("Invalid filters %v", err), w)
+		return
+	}
+
+	if body, err := docker.NetworksPrune(context.Background(), pruneFilters); err != nil {
+		SendHttpError(500, fmt.Sprintf("%v", err), w)
+	} else {
+		SendJSONOrError(w, body)
+	}
+}

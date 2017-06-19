@@ -20,6 +20,7 @@ func main() {
 	log.Printf("Listening for HTTP connections at: http://%v:%v", *domain, *port)
 
 	router := httptreemux.New()
+
 	router.GET("/", indexHandler)
 	router.GET("/*", staticHandler)
 
@@ -36,9 +37,11 @@ func main() {
 
 	router.GET("/api/networks", apiNetworks)
 	router.DELETE("/api/networks/:id", apiNetworksDelete)
+	router.POST("/api/networks/prune", apiNetworksDeleteUnused)
 
 	router.GET("/api/volumes", apiVolumes)
 	router.DELETE("/api/volumes/:id", apiVolumesDelete)
+	router.POST("/api/volumes/prune", apiVolumesDeleteUnused)
 
 	if err := http.ListenAndServe((*domain)+":"+(*port), router); err != nil {
 		log.Fatalf("ListenAndServe error: %v", err)
